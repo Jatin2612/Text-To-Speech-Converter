@@ -1,38 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content=
-        "width=device-width, initial-scale=1.0">
-    <title>Text to Speech Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="hi.css">
-</head>
 
-<body>
-    <div class="container">
-        <div class="app-container">
-            <div class="headings-container">
-                <h1>Text to Speech Converter</h1>
-                <h3>Enter Text and Convert into Speech</h3>
-            </div>
-
-            <div class="interaction-container">
-                <textarea id="textToConvert" 
-                    placeholder="Enter text to convert into speech..." 
-                    id="" cols="35" rows="10" 
-                    class="text-control"></textarea>
-
-                <p class="error-para"></p>
-
-                <button class="btn" id="convertBtn">
-                    Play Converted Sound
-                </button>
-            </div>
+<body class="flex items-center justify-center p-4">
+    <div class="speech-container bg-white rounded-xl p-8 w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">
+            <i class="fas fa-microphone-alt text-indigo-500 mr-2"></i>
+            Text-to-Speech Converter
+        </h1>
+        
+        <div class="mb-6">
+            <label for="voice-selector" class="block text-sm font-medium text-gray-700 mb-2">
+                Select Voice <i class="fas fa-user-voice ml-1 text-indigo-400"></i>
+            </label>
+            <select id="voice-selector" class="voice-selector w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500">
+                <!-- Voices will be populated via JavaScript -->
+            </select>
         </div>
+        
+        <div class="mb-4">
+            <label for="text-to-speech" class="block text-sm font-medium text-gray-700 mb-2">
+                Enter Text <i class="fas fa-pen ml-1 text-indigo-400"></i>
+            </label>
+            <textarea id="text-to-speech" rows="8" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-200" placeholder="Type or paste your text here and hear it come to life!"></textarea>
+        </div>
+        
+        <div class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4 mb-6">
+            <button id="convert-btn" class="convert-btn hover:bg-blue py-3 px-6 rounded-lg font-medium flex items-center justify-center">
+                <i class="fas fa-play mr-2"></i> Play Speech
+            </button>
+            
+            <button id="pause-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                <i class="fas fa-pause mr-2"></i> Pause
+            </button>
+            
+            <button id="stop-btn" class="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                <i class="fas fa-stop mr-2"></i> Stop
+            </button>
+            
+            <button id="clear-btn" class="bg-gray-500 hover:bg-gray-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center">
+                <i class="fas fa-trash-alt mr-2"></i> Clear
+            </button>
+        </div>
+        
+        <div class="flex items-center mb-2">
+            <div id="status-indicator" class="status-indicator mr-2 w-3 h-3 rounded-full bg-gray-300"></div>
+            <span id="status-text" class="text-sm text-gray-600">Ready</span>
+        </div>
+        
+        <div class="flex items-center">
+            <input type="range" id="rate-control" min="0.5" max="2" step="0.1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            <span id="rate-value" class="ml-3 text-sm text-gray-600 w-8">1x</span>
+        </div>
+        
+        <p id="error-message" class="text-red-500 text-sm mt-2 hidden"></p>
     </div>
-
     <script src="hi.js"></script>
 </body>
-
 </html>
